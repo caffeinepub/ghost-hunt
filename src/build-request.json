@@ -1,0 +1,135 @@
+{
+  "kind": "build_request",
+  "title": "Create simple ghost game with 3D environment",
+  "projectName": "Ghost Hunt",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create a 3D game environment using Three.js and React Three Fiber with a dark, spooky atmosphere",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ]
+      },
+      "acceptanceCriteria": [
+        "3D scene renders with appropriate lighting for a ghost game",
+        "Camera controls allow player to navigate the environment",
+        "Scene has atmospheric elements like fog or dim lighting"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement ghost entities that float and move around the 3D environment",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Ghost models are visible in the scene",
+        "Ghosts move autonomously with floating animation",
+        "Multiple ghosts can exist simultaneously"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Add player interaction to catch or interact with ghosts using mouse clicks or keyboard controls",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Player can target ghosts with cursor or crosshair",
+        "Clicking or pressing a key triggers interaction with ghost",
+        "Visual feedback shows when ghost is successfully caught"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Implement score tracking system that records caught ghosts",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend stores current game score",
+        "Score increments when player catches a ghost",
+        "Score persists across page refreshes"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Display game UI showing current score and game status",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Score counter is visible on screen",
+        "UI updates in real-time when score changes",
+        "Game status (playing, paused, game over) is clearly shown"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Create a cohesive dark horror visual theme with eerie colors, atmospheric typography, and ghostly aesthetic elements throughout the entire application interface",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Color palette uses dark, moody tones appropriate for a ghost game",
+        "Typography choices enhance the spooky atmosphere",
+        "UI elements consistently reflect the horror theme",
+        "Layout and spacing create an immersive gaming experience"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Render generated ghost character images and atmospheric background assets from frontend/public/assets/generated directory",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Generated ghost sprites are loaded from static assets folder",
+        "Background images enhance the game atmosphere",
+        "Images are properly displayed in the 3D scene or UI overlay"
+      ]
+    }
+  ],
+  "constraints": [
+    "Use Three.js with React Three Fiber for 3D rendering",
+    "Keep all game logic in a single Motoko actor in backend/main.mo",
+    "Store generated images in frontend/public/assets/generated",
+    "Do not modify immutable frontend paths including hooks and UI components"
+  ],
+  "nonGoals": [
+    "Multiplayer functionality",
+    "Complex AI behavior for ghosts",
+    "Sound effects or music",
+    "Multiple game levels or difficulty settings",
+    "Leaderboards or user profiles"
+  ],
+  "imageRequirements": {
+    "required": [
+      "Glowing white ghost character sprite with transparent edges for 3D texture (ghost-sprite.dim_256x256.png)",
+      "Dark misty forest background with fog and bare trees (forest-bg.dim_1920x1080.png)",
+      "Eerie full moon with atmospheric glow (moon.dim_512x512.png)"
+    ],
+    "edits": []
+  }
+}

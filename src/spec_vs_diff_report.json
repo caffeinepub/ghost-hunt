@@ -1,0 +1,64 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-21T17:00:31.497Z",
+  "summary": "The implementation successfully delivers all core requirements for a 3D ghost hunting game using Three.js and React Three Fiber. The code includes a complete 3D environment with atmospheric lighting and fog (REQ-1), autonomous floating ghost entities (REQ-2), click-based ghost catching mechanics (REQ-3), backend score persistence (REQ-4), real-time UI score display (REQ-5), comprehensive dark horror theming (REQ-6), and asset loading from the generated directory (REQ-7). All acceptance criteria appear to be addressed through the implementation.",
+  "missing_requirements": [],
+  "hallucinated_features": [
+    {
+      "description": "Top scores leaderboard functionality with getTopScores query method",
+      "reason": "The backend includes a public query function 'getTopScores' that returns a sorted list of principal-score tuples, which is explicitly listed as a non-goal ('Leaderboards or user profiles')",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "description": "Score reset functionality via resetScore method",
+      "reason": "The backend implements a resetScore function allowing users to reset their score to zero, which was not requested in any requirement",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "description": "Internet Identity authentication system",
+      "reason": "Full authentication integration with Internet Identity provider, login/logout flows, and identity management was not requested in the BuildRequest",
+      "evidence": [
+        "frontend/src/hooks/useInternetIdentity.ts",
+        "frontend/src/hooks/useActor.ts",
+        "frontend/src/main.tsx"
+      ]
+    },
+    {
+      "description": "Game pause functionality",
+      "reason": "The useGameState hook includes pauseGame and resumeGame functions, but pausing was not mentioned in requirements. REQ-5 only mentions 'playing' and 'game over' status",
+      "evidence": [
+        "frontend/src/hooks/useGameState.ts"
+      ]
+    }
+  ],
+  "confidence": 0.92,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/Crosshair.tsx",
+    "frontend/src/components/Game3DScene.tsx",
+    "frontend/src/components/GameEnvironment.tsx",
+    "frontend/src/components/GameLayout.tsx",
+    "frontend/src/components/GameUI.tsx",
+    "frontend/src/components/Ghost.tsx",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useGameScore.ts",
+    "frontend/src/hooks/useGameState.ts",
+    "frontend/src/hooks/useGhostSpawner.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/index.css",
+    "frontend/src/main.tsx",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

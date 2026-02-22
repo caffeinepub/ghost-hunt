@@ -1,0 +1,174 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Ghost Hunt - 3D Ghost Game Frontend Implementation",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Create a 3D game environment using Three.js and React Three Fiber with a dark, spooky atmosphere",
+      "acceptanceCriteria": [
+        "3D scene renders with appropriate lighting for a ghost game",
+        "Camera controls allow player to navigate the environment",
+        "Scene has atmospheric elements like fog or dim lighting"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Game3DScene.tsx",
+          "operation": "create",
+          "description": "Create the main 3D scene component using React Three Fiber. Set up Canvas with camera, lighting (dim ambient and point lights for spooky atmosphere), fog for atmospheric depth, and orbital camera controls for player navigation. Include environment setup with dark background color and fog effects to create the ghost game atmosphere."
+        },
+        {
+          "path": "frontend/src/components/GameEnvironment.tsx",
+          "operation": "create",
+          "description": "Create environment component that renders the 3D world elements including ground plane, atmospheric fog mesh, and background elements. Use the generated forest background image from frontend/public/assets/generated/forest-bg.dim_1920x1080.png as a texture for the environment backdrop or skybox to enhance the spooky forest setting."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the Game3DScene component into the main application. Import and render Game3DScene as the primary view, replacing any placeholder content. Ensure the 3D game is accessible on application load."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Implement ghost entities that float and move around the 3D environment",
+      "acceptanceCriteria": [
+        "Ghost models are visible in the scene",
+        "Ghosts move autonomously with floating animation",
+        "Multiple ghosts can exist simultaneously"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Ghost.tsx",
+          "operation": "create",
+          "description": "Create Ghost component that renders a 3D ghost entity using a sprite or mesh with texture from the generated ghost sprite at frontend/public/assets/generated/ghost-sprite.dim_256x256.png. Implement floating animation using React Three Fiber's useFrame hook with sine wave motion for vertical bobbing. Add autonomous movement logic with random direction changes to make ghosts wander around the scene."
+        },
+        {
+          "path": "frontend/src/hooks/useGhostSpawner.ts",
+          "operation": "create",
+          "description": "Create hook that manages spawning and tracking multiple ghost instances. Implement logic to create ghosts at random positions within scene bounds, maintain array of active ghosts with their positions and states, and handle ghost lifecycle (spawn, move, despawn). Return ghost data array for rendering in the scene."
+        },
+        {
+          "path": "frontend/src/components/Game3DScene.tsx",
+          "operation": "modify",
+          "description": "Wire Ghost components spawned via useGhostSpawner hook into the Canvas scene. Integrate the ghost spawner and render Ghost components for each spawned ghost instance. Ensure ghosts are properly positioned and animated within the 3D environment."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Add player interaction to catch or interact with ghosts using mouse clicks or keyboard controls",
+      "acceptanceCriteria": [
+        "Player can target ghosts with cursor or crosshair",
+        "Clicking or pressing a key triggers interaction with ghost",
+        "Visual feedback shows when ghost is successfully caught"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Ghost.tsx",
+          "operation": "modify",
+          "description": "Add onClick handler to ghost mesh that detects when player clicks on the ghost. Implement raycasting-based interaction that triggers a catch event when ghost is clicked. Add visual feedback animation (scale pulse, opacity fade, or particle effect) when ghost is successfully caught, then remove ghost from scene."
+        },
+        {
+          "path": "frontend/src/components/Crosshair.tsx",
+          "operation": "create",
+          "description": "Create crosshair or targeting reticle component that overlays the 3D scene center. Implement visual feedback that changes appearance when hovering over a catchable ghost (color change or size increase). Use HTML overlay positioned absolutely or Html component from @react-three/drei for in-scene rendering."
+        },
+        {
+          "path": "frontend/src/hooks/useGameControls.ts",
+          "operation": "create",
+          "description": "Create hook that handles keyboard and mouse input for ghost catching. Listen for click events and optional keyboard shortcuts (spacebar or 'E' key) to trigger catch attempts. Implement raycasting logic to detect which ghost (if any) is under the cursor or in crosshair range. Return catch handler function and current target state."
+        },
+        {
+          "path": "frontend/src/components/Game3DScene.tsx",
+          "operation": "modify",
+          "description": "Wire Crosshair component and useGameControls hook into the scene. Integrate player interaction controls so clicking or keyboard input triggers ghost catching. Connect the controls to ghost components to handle catch events."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Display game UI showing current score and game status",
+      "acceptanceCriteria": [
+        "Score counter is visible on screen",
+        "UI updates in real-time when score changes",
+        "Game status (playing, paused, game over) is clearly shown"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/GameUI.tsx",
+          "operation": "create",
+          "description": "Create overlay UI component that displays current score fetched from backend via getScore method, game status (playing/paused/game over), and any additional game information. Position UI elements using absolute positioning or flexbox overlay. Fetch score from backend on mount and after each ghost catch using the backend interface. Update UI in real-time when score changes via state management."
+        },
+        {
+          "path": "frontend/src/hooks/useGameScore.ts",
+          "operation": "create",
+          "description": "Create hook that manages score state and backend synchronization. Fetch current score from backend using getScore method on mount. Provide incrementScore function that calls backend addScore method when ghost is caught and updates local state. Handle loading and error states for backend calls. Return score value, increment function, and loading state."
+        },
+        {
+          "path": "frontend/src/hooks/useGameState.ts",
+          "operation": "create",
+          "description": "Create hook that manages overall game state including playing/paused/game over status. Provide functions to start game, pause game, resume game, and end game. Track game timer if needed and handle state transitions. Return current game status and control functions for UI and game logic."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire GameUI component to overlay the Game3DScene. Ensure GameUI is rendered on top of the 3D canvas and displays score and game status. Connect GameUI to useGameScore and useGameState hooks."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Create a cohesive dark horror visual theme with eerie colors, atmospheric typography, and ghostly aesthetic elements throughout the entire application interface",
+      "acceptanceCriteria": [
+        "Color palette uses dark, moody tones appropriate for a ghost game",
+        "Typography choices enhance the spooky atmosphere",
+        "UI elements consistently reflect the horror theme",
+        "Layout and spacing create an immersive gaming experience"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Define dark horror theme color palette using CSS custom properties with deep blacks, dark purples, eerie greens, and ghostly whites. Add horror-themed typography with appropriate font families (consider creepy or gothic fonts from Google Fonts). Set global background to dark color and establish base text colors that create spooky atmosphere. Include any additional global styles for horror aesthetic."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Extend Tailwind theme with custom horror color palette matching the design theme (dark backgrounds, eerie accent colors, ghostly highlights). Add custom font families for horror typography if using Google Fonts or system fonts with gothic feel. Configure spacing and other design tokens to support immersive gaming layout. Ensure theme configuration aligns with the dark horror visual requirements."
+        },
+        {
+          "path": "frontend/src/components/GameLayout.tsx",
+          "operation": "create",
+          "description": "Create layout wrapper component that applies consistent horror theme styling to all game screens. Use dark background with atmospheric effects, apply themed typography, and structure layout for immersive experience. Include decorative elements like the generated moon image from frontend/public/assets/generated/moon.dim_512x512.png as a background or corner decoration to enhance spooky atmosphere."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wrap the main game components with GameLayout to apply consistent horror theme styling throughout the application. Ensure the layout component provides the dark, atmospheric aesthetic across all views."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Render generated ghost character images and atmospheric background assets from frontend/public/assets/generated directory",
+      "acceptanceCriteria": [
+        "Generated ghost sprites are loaded from static assets folder",
+        "Background images enhance the game atmosphere",
+        "Images are properly displayed in the 3D scene or UI overlay"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Ghost.tsx",
+          "operation": "modify",
+          "description": "Load the generated ghost sprite texture from frontend/public/assets/generated/ghost-sprite.dim_256x256.png using TextureLoader from Three.js. Apply the texture to ghost mesh material with appropriate transparency settings to show the glowing white ghost with transparent edges. Ensure texture is loaded before rendering to prevent flashing or missing visuals."
+        },
+        {
+          "path": "frontend/src/components/GameEnvironment.tsx",
+          "operation": "modify",
+          "description": "Load the generated forest background image from frontend/public/assets/generated/forest-bg.dim_1920x1080.png and apply it as environment texture for skybox or backdrop plane. Load the moon image from frontend/public/assets/generated/moon.dim_512x512.png and position it in the scene as an atmospheric element (sky object or background sprite). Use TextureLoader to load both images and apply them to appropriate meshes or scene elements."
+        }
+      ]
+    }
+  ]
+}

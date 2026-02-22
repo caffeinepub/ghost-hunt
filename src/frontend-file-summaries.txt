@@ -1,0 +1,15 @@
+{
+  "frontend/src/App.tsx": "Main application component that manages game state and renders either the start screen or the active game with 3D scene and UI overlay.",
+  "frontend/src/components/GameLayout.tsx": "Layout wrapper component that provides the dark horror theme styling, atmospheric moon decoration, and footer with attribution across all game screens.",
+  "frontend/src/components/Game3DScene.tsx": "Main 3D scene component using React Three Fiber that sets up the Canvas, lighting, fog, camera controls, and renders the environment and ghost entities.",
+  "frontend/src/components/GameEnvironment.tsx": "3D environment component that renders the ground plane, cylindrical forest background with texture, and atmospheric fog particles for the spooky setting.",
+  "frontend/src/components/Ghost.tsx": "Interactive 3D ghost entity component with floating animation, autonomous movement, click detection for catching using proper ThreeEvent typing, and texture loading from generated assets.",
+  "frontend/src/components/Crosshair.tsx": "Crosshair overlay component that displays a targeting reticle in the center of the screen for aiming at ghosts.",
+  "frontend/src/components/GameUI.tsx": "Game UI overlay component that displays the current score, reset button, and gameplay instructions with glassmorphism styling.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for backend integration that handle fetching the current score and adding points when ghosts are caught.",
+  "frontend/src/hooks/useGameScore.ts": "Custom hook that manages score state and provides an incrementScore function connected to the backend via React Query mutations.",
+  "frontend/src/hooks/useGameState.ts": "Custom hook that manages overall game state including idle, playing, and paused status with control functions for state transitions.",
+  "frontend/src/hooks/useGhostSpawner.ts": "Custom hook that manages spawning and tracking multiple ghost instances with random positions, periodic spawning, and removal logic.",
+  "frontend/src/index.css": "Global styles with dark horror theme color palette using OKLCH colors, custom Creepster font for headings, and atmospheric styling for the ghost game.",
+  "frontend/tailwind.config.js": "Tailwind configuration extended with dark horror color palette, Creepster display font, custom glow shadows, and floating/pulsing animations for the spooky aesthetic."
+}
